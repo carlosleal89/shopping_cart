@@ -16,13 +16,16 @@ function removeLoadingText() {
   productsEl.innerHTML = '';
 }
 
-insertLoadingText();
+async function renderProducts() {
+  insertLoadingText();
+  const productsArray = await fetchProductsList('computador');
+  removeLoadingText();
+  productsArray.forEach((product) => {
+    const productEl = createProductElement(product);
+    productsEl.append(productEl);
+  });
+}
 
-const productsArray = await fetchProductsList('computador');
-removeLoadingText();
-productsArray.forEach((product) => {
-  const productEl = createProductElement(product);
-  productsEl.append(productEl);
-});
+renderProducts();
 
 document.querySelector('.cep-button').addEventListener('click', searchCep);
