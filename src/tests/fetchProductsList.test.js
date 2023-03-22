@@ -12,9 +12,10 @@ describe('Teste a função fetchProductsList', () => {
     expect(fetchProductsList('computador')).toHaveBeenCalled;
   });
 
-  it('fetch é chamado com o endpoint correto ao executar fetchProductsList', () => {
+  it('fetch é chamado com o endpoint correto ao executar fetchProductsList', async () => {
     const endpoint = 'https://api.mercadolibre.com/sites/MLB/search?q=computador';
-    expect(fetchProductsList('computador')).toHaveBeenCalledWith(endpoint);
+    await fetchProductsList('computador');
+    expect(fetch).toHaveBeenCalledWith(endpoint);
   });
 
   it('verifica se o retorno da função fetchProductsList é o esperado', async () => {
@@ -23,7 +24,7 @@ describe('Teste a função fetchProductsList', () => {
   })
 
   it('verifica se a função retorna um erro quando não é passado um argumento de busca', () => {
-    expect(() => fetchProductsList()).toThrowError(error);
+    expect(() => fetchProductsList()).toThrow(new Error ('Termo de busca não informado'));
   })
 
   // it('...', () => {
