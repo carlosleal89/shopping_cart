@@ -1,7 +1,8 @@
 import { searchCep } from './helpers/cepFunctions';
 import './style.css';
-import { fetchProductsList } from './helpers/fetchFunctions';
-import { createProductElement } from './helpers/shopFunctions';
+import { fetchProductsList, fetchProduct } from './helpers/fetchFunctions';
+import { createCartProductElement, createProductElement } from './helpers/shopFunctions';
+import { getSavedCartIDs } from './helpers/cartFunctions';
 
 const productsEl = document.querySelector('.products');
 
@@ -36,3 +37,16 @@ async function renderProducts() {
 renderProducts();
 
 document.querySelector('.cep-button').addEventListener('click', searchCep);
+window.onload = () => {
+  if (localStorage) {
+    const productIds = getSavedCartIDs();
+    const productPromisses = productIds.map((id) => fetchProduct(id));
+    Promise.all(productPromisses).then((values) => {
+      const productContainerEl = document.querySelector('.cart__products');
+      values.forEach((element) => {
+        const cartElement = createCartProductElement(element);
+        productContainerEl.append(cartElement);
+      });
+    });
+  }
+};
