@@ -19,7 +19,7 @@ describe('Teste a função fetchProduct', () => {
     const expectedReturn = await fetchProduct('MLB1405519561');
     expect(expectedReturn).toEqual(product);
   });
-  it('verifica se a função retorna um erro quando não é passado um argumento de busca', () => {
-    expect(() => fetchProduct()).toThrow(new Error ('ID não informado'));
+  it('verifica se a função retorna um erro quando não é passado um argumento de busca', async () => {
+    await expect(() => fetchProduct()).rejects.toThrow(new Error ('ID não informado'));
   });
 });
