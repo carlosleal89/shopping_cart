@@ -18,12 +18,19 @@ function removeLoadingText() {
 
 async function renderProducts() {
   insertLoadingText();
-  const productsArray = await fetchProductsList('computador');
-  removeLoadingText();
-  productsArray.forEach((product) => {
-    const productEl = createProductElement(product);
-    productsEl.append(productEl);
-  });
+  try {
+    const productsArray = await fetchProductsList('computador');
+    removeLoadingText();
+    productsArray.forEach((product) => {
+      const productEl = createProductElement(product);
+      productsEl.append(productEl);
+    });
+  } catch {
+    const errorTextEl = document.createElement('p');
+    errorTextEl.innerHTML = 'Algum erro ocorreu, recarregue a página e tente novamente';
+    errorTextEl.className = 'error';
+    productsEl.append(errorTextEl);
+  }
 }
 
 renderProducts();
