@@ -15,5 +15,3 @@ export const fetchProductsList = (product) => {
   return fetch(`${endpoint}${product}`)
     .then((response) => response.json()).then((data) => data.results);
 };
-
-console.log(fetchProduct());
