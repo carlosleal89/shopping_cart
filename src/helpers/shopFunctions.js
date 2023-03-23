@@ -1,6 +1,9 @@
 import { removeCartID, saveCartID } from './cartFunctions';
 import { fetchProduct } from './fetchFunctions';
 
+let totalPrice = 0;
+const totalPriceEl = document.querySelector('.total-price');
+
 // Esses comentários que estão antes de cada uma das funções são chamados de JSdoc,
 // experimente passar o mouse sobre o nome das funções e verá que elas possuem descrições!
 
@@ -46,8 +49,16 @@ export const getIdFromProduct = (product) => (
  * @param {Element} li - Elemento do produto a ser removido do carrinho.
  * @param {string} id - ID do produto a ser removido do carrinho.
  */
+
+async function discountTotalPrice(id) {
+  const { price } = await fetchProduct(id);
+  totalPrice -= price;
+  totalPriceEl.innerHTML = totalPrice.toFixed(2);
+}
+
 const removeCartProduct = (li, id) => {
   li.remove();
+  discountTotalPrice(id);
   removeCartID(id);
 };
 
@@ -60,6 +71,12 @@ const removeCartProduct = (li, id) => {
  * @param {string} product.pictures - Imagens do produto.
  * @returns {Element} Elemento de um product do carrinho.
  */
+
+function getTotalPrice(price) {
+  totalPrice += price;
+  totalPriceEl.innerHTML = totalPrice.toFixed(2);
+}
+
 export const createCartProductElement = ({ id, title, price, pictures }) => {
   const li = document.createElement('li');
   li.className = 'cart__product';
@@ -80,6 +97,7 @@ export const createCartProductElement = ({ id, title, price, pictures }) => {
   infoContainer.appendChild(priceElement);
 
   li.appendChild(infoContainer);
+  getTotalPrice(price);
 
   const removeButton = createCustomElement(
     'i',
@@ -128,7 +146,6 @@ export const createProductElement = ({ id, title, thumbnail, price }) => {
     saveCartID(id);
     const data = await fetchProduct(id);
     const productEl = createCartProductElement(data);
-    console.log(productEl);
     const productContainerEl = document.querySelector('.cart__products');
     productContainerEl.append(productEl);
   });
