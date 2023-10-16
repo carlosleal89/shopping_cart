@@ -20,7 +20,7 @@ function removeLoadingText() {
 async function renderProducts() {
   insertLoadingText();
   try {
-    const productsArray = await fetchProductsList('computador');
+    const productsArray = await fetchProductsList('carburador');
     removeLoadingText();
     productsArray.forEach((product) => {
       const productEl = createProductElement(product);

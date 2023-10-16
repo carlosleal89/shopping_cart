@@ -10,29 +10,29 @@ Bem-vindo ao Shopping Cart, uma forma simples de fazer suas compras.
 - Calcule o frete com base no seu cep.
 
 ## Tecnologias Utilizadas
-- **Frontend:** React.js, CSS
+- **Frontend:** React.js, CSS, Vite
 - **APIs:** API do Mercado Livre
 
 
 ## Como Executar o Projeto:
   **Clone o Repositório:**
   
-    - git clone git@github.com:carlosleal89/shopping_cart.git
+    git clone git@github.com:carlosleal89/shopping_cart.git
 
   **Instale as Dependências:**
 
-    - npm install
+    npm install
 
 ## Via Docker
 - Caso não tenha o Docker instalado em seu sistema, acesse https://www.docker.com/get-started/
   
   1. **Monte a imagem docker:**
      
-         - docker build -t shoppingcart .
+         docker build -t shoppingcart .
     
   2. **Execute o container:**
      
-         - docker run -p 3000:3000 shoppingcart
+         docker run -p 3000:5173 shoppingcart
      
     - Acesse o aplicativo em seu navegador em http://localhost:3000.
 
