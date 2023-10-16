@@ -9,7 +9,8 @@ const productsEl = document.querySelector('.products');
 const welcome = document.createElement('h1');
 
 function showCart() {
-  console.log('tst');
+  const cartEl = document.getElementsByClassName('cart');
+  cartEl[0].classList.toggle('cart-mobile');
 }
 
 function welcomeMsg() {
