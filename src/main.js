@@ -5,6 +5,13 @@ import { createCartProductElement, createProductElement } from './helpers/shopFu
 import { getSavedCartIDs } from './helpers/cartFunctions';
 
 const productsEl = document.querySelector('.products');
+const welcome = document.createElement('h1');
+
+function welcomeMsg() {
+  welcome.innerHTML = 'Digite seu produto na barra de busca.';
+  welcome.className = 'welcome-msg';
+  productsEl.append(welcome);
+}
 
 function insertLoadingText() {
   const loadingTextEl = document.createElement('p');
@@ -17,10 +24,16 @@ function removeLoadingText() {
   productsEl.innerHTML = '';
 }
 
+function removeWelcomMsg() {
+  welcome.innerHTML = '';
+}
+
 async function renderProducts() {
+  removeWelcomMsg();
   insertLoadingText();
   try {
-    const productsArray = await fetchProductsList('carburador');
+    const { value } = document.getElementById('search-input');
+    const productsArray = await fetchProductsList(value);
     removeLoadingText();
     productsArray.forEach((product) => {
       const productEl = createProductElement(product);
@@ -34,7 +47,11 @@ async function renderProducts() {
   }
 }
 
-renderProducts();
+welcomeMsg();
+
+const searchBtn = document.getElementById('search-btn');
+
+searchBtn.addEventListener('click', renderProducts);
 
 document.querySelector('.cep-button').addEventListener('click', searchCep);
 window.onload = () => {
