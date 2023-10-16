@@ -15,6 +15,10 @@
   height: 90px;
 }
 
+#cart-img {
+  display: none;
+}
+
 .container-title {
   width: 75%;
 }

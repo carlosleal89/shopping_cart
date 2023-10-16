@@ -1,11 +1,16 @@
 import { searchCep } from './helpers/cepFunctions';
 import './style.css';
+import './media-queries.css';
 import { fetchProductsList, fetchProduct } from './helpers/fetchFunctions';
 import { createCartProductElement, createProductElement } from './helpers/shopFunctions';
 import { getSavedCartIDs } from './helpers/cartFunctions';
 
 const productsEl = document.querySelector('.products');
 const welcome = document.createElement('h1');
+
+function showCart() {
+  console.log('tst');
+}
 
 function welcomeMsg() {
   welcome.innerHTML = 'Digite seu produto na barra de busca.';
@@ -48,6 +53,10 @@ async function renderProducts() {
 }
 
 welcomeMsg();
+
+const cartBtnEl = document.getElementById('show-cart');
+
+cartBtnEl.addEventListener('click', showCart);
 
 const searchBtn = document.getElementById('search-btn');
 
