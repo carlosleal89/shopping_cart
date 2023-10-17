@@ -645,4 +645,27 @@
   .cart__address {
     margin: 2rem;
   }
+
+  /* .cart__product__info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+    padding: 0 20px;
+    color: red;
+  } */
+
+  .cart__product {
+    height: 100%;
+  }
+
+  .cart__product__info-container .product__title {
+    font-size: 1rem;
+  }
+
+  .product__price, .price span {
+    align-items: center;
+  }
 }
